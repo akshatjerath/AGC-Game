@@ -1,6 +1,6 @@
 # The Idle Register
 
-A picture-driven choose-your-own-adventure about seeds, quotas and a corporation that owns every harvest. Around 5 minutes a run, 16 beats, 8 endings.
+A picture-driven choose-your-own-adventure about seeds, quotas and a corporation that owns every harvest. A four-picture storyboard sets up the world before the first choice. Around 5 minutes a run, 16 beats, 8 endings.
 
 **Play:** [https://akshatjerath.github.io/AGC-Game/](https://akshatjerath.github.io/AGC-Game/) (or open `index.html` in Chrome).
 

@@ -135,12 +135,12 @@ async function beat(id) {
 async function run(fromSprout = false) {
   S = fresh(); show(null); music(false); playing = true; $("meta").textContent = "";
   if (!fromSprout) {
-    await fade(true); await scene("intake", { loop: true }); preload("prologue"); await fade(false);
+    await fade(true); await scene("intake", { loop: true }); preload("b00_charter"); BOARD.forEach(f => { new Image().src = P(f.img); }); await fade(false);
     show("intake"); $("name").value = lastName; $("name").focus();
     await new Promise(r => { $("intakeForm").onsubmit = e => { e.preventDefault(); $("imprint").querySelector("b").textContent = ($("name").value.trim() || "Citizen 404").slice(0, 24); $("bStamp").classList.add("pressed"); $("imprint").classList.add("on"); setTimeout(() => { $("frame").classList.add("thud"); setTimeout(() => $("frame").classList.remove("thud"), 200); }, 380); setTimeout(r, 1500); }; });
     $("bStamp").classList.remove("pressed"); $("imprint").classList.remove("on");
     pname = ($("name").value.trim() || "Citizen 404").slice(0, 24); store.set("name", pname); lastName = pname; show(null);
-    await playOnce("prologue");
+    await storyboard();
     return act0();
   }
   Object.assign(S, { trust: 25, compliance: 3 }, store.get("cp", {}));   // restore the state you carried to Beat 6
@@ -148,11 +148,36 @@ async function run(fromSprout = false) {
   return act2();
 }
 
+/* ---------- storyboard: four stills that set up the world before the first choice ---------- */
+async function storyboard() {
+  const img = $("boardImg"), nav = $("boardNav"), btn = $("bNext"), skipBtn = $("bSkip");
+  let skip = false, go = null, lastGo = 0;
+  const next = () => { const n = performance.now(); if (paused || !go || n - lastGo < 350) return; lastGo = n; const g = go; go = null; g(); };
+  const key = e => { if (document.activeElement.tagName === "INPUT") return; if ([" ", "Enter", "ArrowRight", "1"].includes(e.key)) { e.preventDefault(); next(); } };
+  btn.onclick = next; skipBtn.onclick = () => { skip = true; const g = go; go = null; g && g(); };
+  document.addEventListener("keydown", key);
+  skipBtn.hidden = !store.get("board", false);
+  show("board"); nav.classList.add("on"); $("ledger").classList.add("board");
+  for (let i = 0; i < BOARD.length && !skip; i++) {
+    const f = BOARD[i];
+    img.classList.remove("on"); caption(""); await sleep(280);
+    img.src = P(f.img); try { await img.decode(); } catch (e) {}
+    img.classList.add("on"); caption(f.line.replace("{name}", pname));
+    $("boardStep").textContent = `${i + 1} / ${BOARD.length}`;
+    btn.lastElementChild.textContent = i === BOARD.length - 1 ? "To the Charter" : "Next";
+    await new Promise(r => { go = r; });
+  }
+  document.removeEventListener("keydown", key); store.set("board", true);
+  nav.classList.remove("on"); $("ledger").classList.remove("board"); caption(""); await fade(true); show(null); img.classList.remove("on");
+}
+
 async function act0() {
   const b = STORY.b00;
-  hud("b00"); await scene(b.video); preload(b.next); caption(b.line); await Promise.all([reveal(), clipDone()]); await sleep(600);
+  hud("b00"); await scene(b.video); $("fade").classList.remove("on"); preload(b.next); caption(b.line); await Promise.all([reveal(), clipDone()]); await sleep(600);
   for (let waits = 0; ;) {
-    if (await choose(b.choices, b.secs, b.timeout) === "sign") { S.compliance++; break; }
+    const c = await choose(b.choices, b.secs, b.timeout);
+    if (c === "sign") { S.compliance++; break; }
+    if (c === "refuse") return ending(0);
     if (++waits >= 2) return ending(0);
     caption(STORY.b00_again.line); await sleep(2200); caption("");
   }

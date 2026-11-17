@@ -211,3 +211,23 @@ body{background:var(--soot);background-image:radial-gradient(ellipse 90% 70% at 
 /* the timer label and bar only show while a choice is live */
 .ledger-foot>*{transition:opacity .3s}
 #choices:not(.on)~.ledger-foot>*{opacity:0}
+
+/* storyboard */
+#board{background:#0b0907}
+#boardImg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .45s var(--ease)}
+#boardImg.on{opacity:1}
+#boardNav{display:none;background:var(--panel)}
+#boardNav.on{display:block;pointer-events:auto}
+#boardNav .lbl{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--paper-dim);padding:18px 20px 0}
+.bnav{padding:12px 20px 4px;display:flex;flex-direction:column;gap:8px;align-items:stretch}
+.skip{align-self:flex-end;font-size:13px;color:var(--paper-faint);padding:4px 8px;border-radius:999px}
+.skip:hover{color:var(--paper)}
+/* softer, rounder corners for the choice plate and the option buttons */
+.ledger{border-top-left-radius:22px;overflow:hidden;border:1px solid var(--line-hi);border-right:0;border-bottom:0}
+#choices{border:0;border-top-left-radius:0}
+.ledger-foot{border:0}
+.ch{border-radius:14px}
+.ch .k{border-radius:9px}
+.ch[disabled]{border-radius:14px}
+.btn,.stamp{border-radius:12px}
+.ledger.board #choices{display:none}

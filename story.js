@@ -12,8 +12,8 @@
 */
 
 const STORY = {
-  b00: { video: "b00_charter", line: "1996. The representative offers a pen.", secs: 15, timeout: "wait", next: "b01_ration_drop",
-         choices: [["Sign the Charter", "sign"]] },
+  b00: { video: "b00_charter", line: "The Group's representative offers a pen.", secs: 15, timeout: "wait", next: "b01_ration_drop",
+         choices: [["Sign the Charter", "sign"], ["Refuse", "refuse"]] },
   b00_again: { line: "The representative holds the pen out again." },
 
   b01: { video: "b01_ration_drop", line: "Certified Yield, Citizen {name}. Standard weight.", secs: 10, timeout: "sign", next: "b02_line4",
@@ -64,6 +64,14 @@ const STORY = {
   b15: { video: "b15_stairwell", line: "Boots on the stairs. Vikram's hand covers yours. Not choosing is also a choice.", secs: 60, timeout: "wait",
          choices: [["Open the door", "surrender"], ["Burn the flat", "burn"]] }
 };
+
+/* Storyboard shown after the name stamp, before the first choice (images/ + .jpg) */
+const BOARD = [
+  { img: "p1_field",     line: "1996. The fields give less every season." },
+  { img: "p2_bill",      line: "The harvest comes in thin. The bills don't care." },
+  { img: "p3_charter",   line: "The Group's Charter: sign over every seed and every harvest. In return, you eat." },
+  { img: "p4_neighbour", line: "“Sign it. The ones who refuse end up outside that wall.”" }
+];
 
 const ENDS = [
   ["e0_unsigned_soil", "The Unsigned Soil", "Vikram never signed. His family lives outside the walls, digging bitter roots, owned by no one."],
