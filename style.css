@@ -145,3 +145,65 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .frame.thud{animation:thud .18s ease-out}
 @keyframes thud{40%{transform:translateY(3px)}}
 @media (prefers-reduced-motion:reduce){.imprint.on{animation:none;opacity:1;transform:rotate(-7deg)}}
+
+/* ================= Paper-ledger redesign, dark edition ================= */
+:root{
+  --soot:#17120d; --soot-2:#211a13; --panel:#2a2119; --chip:#3b2e22; --chip-hi:#4a3a2b;
+  --line:#43352a; --line-hi:#6e5843;
+  --paper:#ede2cf; --paper-dim:#bfae93; --paper-faint:#8c7b64;
+  --sodium:#c99a62; --rust:#c07848; --rust-deep:#7d4a2c;
+  --frame-w:min(1280px, 92vw, calc((100vh - 270px) * 16 / 9));
+}
+body{background:var(--soot);background-image:radial-gradient(ellipse 90% 70% at 50% 40%,#231b13 0%,var(--soot) 75%)}
+.shell{gap:0}
+.topline{align-items:flex-end;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.brand{display:flex;flex-direction:column;gap:6px}
+.topline .mark{font-family:"Instrument Serif",serif;font-size:clamp(28px,2.6vw,40px);line-height:1;color:var(--paper);letter-spacing:-.01em}
+.who{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--sodium);min-height:1em}
+.pill{display:flex;gap:4px;padding:4px;border:1px solid var(--line-hi);border-radius:999px;background:var(--soot-2)}
+.pill .ctl{font-size:14px;color:var(--paper-dim);padding:7px 14px;border-radius:999px}
+.pill .ctl:hover,.pill .ctl:focus-visible{background:var(--chip);color:var(--paper)}
+
+/* bezel with registration-mark corners */
+.bezel{position:relative;padding:10px;border-radius:22px;background:var(--soot-2);border:1px solid var(--line);
+  box-shadow:0 30px 70px -25px rgba(0,0,0,.85)}
+.bezel::before{content:"";position:absolute;inset:-12px;pointer-events:none;--c:var(--line-hi);
+  background:
+   linear-gradient(var(--c),var(--c)) top left/32px 1.5px,linear-gradient(var(--c),var(--c)) top left/1.5px 32px,
+   linear-gradient(var(--c),var(--c)) top right/32px 1.5px,linear-gradient(var(--c),var(--c)) top right/1.5px 32px,
+   linear-gradient(var(--c),var(--c)) bottom left/32px 1.5px,linear-gradient(var(--c),var(--c)) bottom left/1.5px 32px,
+   linear-gradient(var(--c),var(--c)) bottom right/32px 1.5px,linear-gradient(var(--c),var(--c)) bottom right/1.5px 32px;
+  background-repeat:no-repeat}
+.frame{border-radius:14px;border:1px solid var(--line-hi);box-shadow:none}
+
+/* choice panel */
+.ledger{width:clamp(260px,32%,420px)}
+#choices{background:var(--panel);border-top-left-radius:6px}
+#choices .lbl,.ledger-foot .lbl{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--paper-dim)}
+#choices .lbl{padding:18px 20px 0}
+#opts{padding:12px 20px 4px;display:flex;flex-direction:column;gap:8px}
+.ch{align-items:center;gap:14px;padding:14px 16px;border-radius:7px;background:var(--chip);font-size:clamp(15px,1.25vw,19px)}
+.ch .k{width:28px;height:28px;display:grid;place-items:center;border-radius:4px;background:var(--soot-2);color:var(--paper-dim);font-size:13px}
+.ch:hover,.ch:focus-visible{background:var(--chip-hi)}
+.ch:hover .k{background:var(--sodium);color:var(--soot)}
+.ch.picked{background:var(--sodium);color:var(--soot)}
+.ch.picked .k{background:var(--soot);color:var(--sodium)}
+.ch[disabled]{background:transparent;border:1px dashed var(--line-hi)}
+.ledger-foot{background:var(--panel);border-top:0;padding:10px 20px 18px;gap:12px;align-items:stretch;text-transform:none}
+.ledger-foot .lbl{text-transform:none;letter-spacing:0;font-size:13px}
+#bar{height:2px;background:var(--line)}
+#bar i{background:var(--sodium)}
+
+/* caption as a dateline + line, left-aligned */
+#caption{text-align:left;font-style:italic;font-size:clamp(22px,2.2vw,32px);margin-top:22px;min-height:1.4em;padding-bottom:16px;border-bottom:1px solid var(--line)}
+#caption .dl{font-style:normal;color:var(--sodium);margin-right:1.1em}
+.hints{width:var(--frame-w);display:flex;justify-content:space-between;padding-top:14px;font-size:13px;color:var(--paper-faint)}
+.hints b{color:var(--paper-dim);margin-right:6px;font-size:12px}
+
+/* overlays pick up the warmer palette */
+#menu{background:linear-gradient(90deg,rgba(23,18,13,.93) 0%,rgba(23,18,13,.7) 40%,rgba(23,18,13,0) 72%)}
+.intake,#toast{background:rgba(42,33,25,.95);border-radius:8px}
+#end{background:rgba(23,18,13,.8)}
+.btn{border-radius:7px}
+@media (max-width:760px){.hints{display:none}.pill .ctl{padding:6px 9px;font-size:12px}.bezel{padding:6px;border-radius:14px}}
+@media (max-width:760px){.bezel::before{display:none}.pill .ctl{white-space:nowrap}.ledger{width:70%}}

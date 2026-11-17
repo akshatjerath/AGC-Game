@@ -64,7 +64,12 @@ function playOnce(name) {
 
 /* ---------- UI ---------- */
 function show(id) { document.querySelectorAll(".layer").forEach(l => l.classList.toggle("show", l.id === id)); }
-function caption(t) { const c = $("caption"); c.textContent = t || ""; c.classList.toggle("on", !!t); }
+function caption(t) {   // a short opening sentence ("1996.", "Six weeks later.") is set apart as a dateline
+  const c = $("caption"); c.textContent = ""; c.classList.toggle("on", !!t); if (!t) return;
+  const m = t.match(/^([^.“"]{1,18}\.)\s+(.+)$/);
+  if (m && m[1].split(" ").length <= 3) { const d = document.createElement("span"); d.className = "dl"; d.textContent = m[1]; c.append(d, " ", m[2]); }
+  else c.textContent = t;
+}
 let toastT;
 function toast(m) { const t = $("toast"); t.textContent = "File updated: " + pname + " · " + m; t.classList.add("on"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("on"), 2600); }
 async function fade(on) { $("fade").classList.toggle("on", on); await sleep(800); }
