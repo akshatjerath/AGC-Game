@@ -25,7 +25,7 @@ const STORY = {
   b03: { video: "b03_short_rations", line: "A coworker's tin comes up empty.", secs: 10, timeout: "keep", next: "b04_meera_package",
          choices: [["Split your ration", "share"], ["Keep it", "keep"]] },
 
-  b04: { video: "b04_meera_package", line: "“Take this. Don't look at me.”", secs: 8, timeout: "dump", next: "b05_unit4b_vikram",
+  b04: { video: "b04_meera_package", line: "Your coworker Meera: “Take this. Don't look at me.”", secs: 8, timeout: "dump", next: "b05_unit4b_vikram",
          choices: [["Hide it in your coat", "hide"], ["Report Meera to Vane", "report"], ["Drop it in the chute", "dump"]] },
 
   tally: { video: "x_tallyman", line: "Supervisor Vane approves your promotion." },
@@ -48,21 +48,21 @@ const STORY = {
          choices: [["Slip out during the sweep", "slip"], ["Stay and hold the floorboard", "stay"]] },
 
   b10: { video: "b10_archive", line: "A sealed lab. The sterility data is still on a drive.", secs: 10, timeout: "leave", next: "b11_badge",
-         choices: [["Copy the data", "copy", "awake3", "needs more awareness"], ["Leave it", "leave"]] },
+         choices: [["Copy the data", "copy", "awake3", "you burned the torn label"], ["Leave it", "leave"]] },
 
   b11: { video: "b11_badge", line: "A Terrace District badge, for a price.", secs: 10, timeout: "refuse", next: "b12_truck3",
          choices: [["Refuse the badge", "refuse"], ["Buy it", "buy"]] },
 
   b12: { video: "b12_truck3", line: "“Third truck. The driver doesn't check the cinders.”", secs: 10, timeout: "keep", next: "b13_ledger",
-         choices: [["Bury the tin under the slag", "bury", "trusted", "Meera doesn't trust you"], ["Keep the tin", "keep"]] },
+         choices: [["Bury the tin under the slag", "bury", "trusted", "Meera no longer trusts you"], ["Keep the tin", "keep"]] },
 
   b13: { video: "b13_ledger", line: "The ledger is read in the square.", next: "b14_broadcast" },
 
   b14: { video: "b14_broadcast", line: "The district loudspeakers. One switch.", secs: 10, timeout: "silent", next: "b15_stairwell",
-         choices: [["Broadcast the sterility data", "cast", "hasData", "you have no data"], ["Stay silent", "silent"]] },
+         choices: [["Broadcast the sterility data", "cast", "hasData", "you never copied the archive"], ["Stay silent", "silent"]] },
 
-  b15: { video: "b15_stairwell", line: "Boots on the stairs. Vikram's hand covers yours.", secs: 60, timeout: "wait",
-         choices: [["Surrender the sprout", "surrender"], ["Burn the flat", "burn"]] }
+  b15: { video: "b15_stairwell", line: "Boots on the stairs. Vikram's hand covers yours. Not choosing is also a choice.", secs: 60, timeout: "wait",
+         choices: [["Open the door", "surrender"], ["Burn the flat", "burn"]] }
 };
 
 const ENDS = [

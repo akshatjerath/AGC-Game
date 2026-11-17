@@ -207,3 +207,7 @@ body{background:var(--soot);background-image:radial-gradient(ellipse 90% 70% at 
 .btn{border-radius:7px}
 @media (max-width:760px){.hints{display:none}.pill .ctl{padding:6px 9px;font-size:12px}.bezel{padding:6px;border-radius:14px}}
 @media (max-width:760px){.bezel::before{display:none}.pill .ctl{white-space:nowrap}.ledger{width:70%}}
+
+/* the timer label and bar only show while a choice is live */
+.ledger-foot>*{transition:opacity .3s}
+#choices:not(.on)~.ledger-foot>*{opacity:0}
