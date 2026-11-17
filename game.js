@@ -180,7 +180,7 @@ async function act2() {
   if (await beat("b08") === "grace") { S.grace = true; S.trust += 15; S.solidarity++; } else S.trust -= 30;
   if (await beat("b09") === "stay") return ending(3);
   if (await beat("b10") === "copy") { S.data = true; S.ready += 25; S.awake++; toast("archive copied"); }
-  if (await beat("b11") === "refuse") S.noTools = true;
+  if (await beat("b11") === "refuse") S.noTools = true; else { S.trust -= 20; toast("badge bought · Meera hears of it"); }
   if (await beat("b12") === "bury") { S.ready += 20; S.smuggled = true; toast("manifest filed"); }
   await beat("b13"); S.ready = Math.min(100, S.ready + S.solidarity * 10);
   if (await beat("b14") === "cast") { S.broadcast = true; toast("transmission logged"); }
