@@ -2,7 +2,7 @@
 
 A picture-driven choose-your-own-adventure about seeds, quotas and a corporation that owns every harvest. Around 5 minutes a run, 16 beats, 8 endings.
 
-**Play:** https://akshatjerath.github.io/agc-game/ (or open `index.html` in Chrome).
+**Play:** [https://akshatjerath.github.io/agc-game/](https://akshatjerath.github.io/AGC-Game/) (or open `index.html` in Chrome).
 
 ## Files
 | File | What it holds |
