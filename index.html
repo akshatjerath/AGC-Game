@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Idle Register</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="shell">
+  <header class="topline">
+    <span class="mark">The Idle Register</span>
+    <span class="meta"><span class="num" id="meta"></span><button class="ctl" id="bPause">Pause</button><button class="ctl" id="bMute">Sound on</button><button class="ctl" id="bFull">Fullscreen</button></span>
+  </header>
+
+  <div class="frame" id="frame">
+    <div id="stage">
+      <video id="vA" playsinline preload="auto"></video>
+      <video id="vB" playsinline preload="auto"></video>
+      <video id="vPre" muted preload="auto" hidden></video>
+    </div>
+    <div class="shade"></div>
+
+    <section id="menu" class="layer">
+      <h1>The Idle<br><em>Register</em></h1>
+      <p class="tag">Every seed is owned. Every quota is counted. One guava, passed hand to hand, can still be planted.</p>
+      <nav class="menu-list">
+        <button class="mbtn" id="bNew">Begin intake</button>
+        <button class="mbtn" id="bJump" hidden>Return to the sprout</button>
+        <button class="mbtn" id="bEnds">Endings found <span id="mCount" class="num"></span></button>
+        <button class="mbtn quiet" id="bSlow">Reading time · <span id="slowLbl">standard</span></button>
+      </nav>
+    </section>
+
+    <section id="intake" class="layer">
+      <form class="intake" id="intakeForm" autocomplete="off">
+        <label for="name">Citizen designation</label>
+        <input id="name" maxlength="24" spellcheck="false" placeholder="Citizen 404">
+        <button class="stamp" id="bStamp" type="submit">Stamp &amp; begin</button>
+        <div class="imprint" id="imprint" aria-hidden="true"><span>Registered</span><b></b><i>Agri-Continuity Group</i></div>
+      </form>
+    </section>
+
+    <section id="end" class="layer">
+      <div class="end-card">
+        <p class="end-no num" id="eNo"></p>
+        <h2 id="eTitle"></h2>
+        <p class="end-sub" id="eSub"></p>
+        <p class="end-count num" id="eCount"></p>
+        <div class="end-actions">
+          <button class="btn primary" id="eJump">Return to the sprout</button>
+          <button class="btn" id="eNew">New intake</button>
+          <button class="btn" id="eEnds">Endings found</button>
+          <button class="btn" id="eMenu">Main menu</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Corner ledger: always covers the bottom-right corner of the video -->
+    <aside class="ledger" id="ledger">
+      <div id="choices"><div id="opts"></div></div>
+      <div class="ledger-foot">
+        <span class="num" id="hudBeat"></span>
+        <div id="bar"><i></i></div>
+      </div>
+    </aside>
+
+    <div id="toast"></div>
+    <div id="pause" role="dialog" aria-label="Paused"><p class="pt">Paused</p><button class="btn primary" id="pResume">Resume</button><button class="btn" id="pMenu">Main menu</button></div>
+    <audio id="music" src="audio/menu.mp3" loop preload="auto"></audio>
+    <div id="fade"></div>
+  </div>
+
+  <p id="caption" aria-live="polite"></p>
+</main>
+
+<section id="gallery" class="layer">
+  <h2>Endings found</h2>
+  <div class="grid" id="grid"></div>
+  <button class="btn" id="gBack">Back</button>
+</section>
+
+<script src="story.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
