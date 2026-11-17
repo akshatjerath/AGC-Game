@@ -92,7 +92,7 @@ function choose(items, secs, timeoutVal) {
       else live[i] = val;
       b.append(k, t); b.onclick = () => done(val); opts.appendChild(b);
     });
-    const key = e => { const n = parseInt(e.key, 10) - 1; if (live[n] !== undefined) done(live[n]); };
+    const key = e => { if (paused) return; const n = parseInt(e.key, 10) - 1; if (live[n] !== undefined) done(live[n]); };
     document.addEventListener("keydown", key);
     let used = 0, last = performance.now(), raf, over = false;
     const tick = now => {
@@ -143,6 +143,7 @@ async function run(fromSprout = false) {
     await playOnce("prologue");
     return act0();
   }
+  Object.assign(S, { trust: 25, compliance: 3 }, store.get("cp", {}));   // restore the state you carried to Beat 6
   pname = lastName || "Citizen 404";
   return act2();
 }
@@ -172,6 +173,7 @@ async function act1() {
 
 async function act2() {
   sprout = true; store.set("sprout", true);
+  store.set("cp", { compliance: S.compliance, solidarity: S.solidarity, trust: S.trust, honest: S.honest, vikram: S.vikram });
   if (e3seen) { await beat("b06_warm"); e3seen = false; store.set("e3", false); return ending(6); }
   await beat("b06"); S.ready += 25;
   if (await beat("b07") === "hide") { S.awake += 2; toast("evidence retained"); } else S.compliance++;
